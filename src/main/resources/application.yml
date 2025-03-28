@@ -1,0 +1,45 @@
+debug: true
+spring:
+  output:
+    ansi:
+      enabled: ${SPRING_OUTPUT_ANSI_ENABLED:ALWAYS}
+  main:
+    allow-bean-definition-overriding: ${SPRING_MAIN_ALLOW_BEAN_DEFINITION_OVERRIDING:true}
+  application:
+    name: kyc
+  datasource:
+    driver-class-name: ${DATA_SOURCE_DRIVER_CLASS_NAME:org.postgresql.Driver}
+    url: ${DATA_SOURCE_URL}
+    username: ${DATA_SOURCE_USERNAME}
+    password: ${DATA_SOURCE_PASSWORD}
+  jpa:
+    hibernate:
+      ddl-auto: ${JPA_HIBERNATE_DDL_AUTO:update}
+    properties:
+      hibernate:
+        dialect: ${JPA_PROPERTIES_HIBERNATE_DIALECT:org.hibernate.dialect.PostgreSQLDialect}
+        format_sql: ${JPA_PROPERTIES_HIBERNATE_FORMAT_SQL:true}
+    show-sql: ${JPA_SHOW_SQL:false}
+    database: ${JPA_DATABASE:postgresql}
+    database-platform: ${JPA_DATABASE_PLATFORM:org.hibernate.dialect.PostgreSQLDialect}
+  jackson:
+    serialization:
+      FAIL_ON_EMPTY_BEANS: ${JACKSON_SERIALIZATION_FAIL_ON_EMPTY_BEANS:true}
+api:
+  cisef:
+    url: ${API_CISEF_URL}
+    authUrl: ${API_CISEF_AUTH_URL}
+    newOperationUrl: ${API_CISEF_NEW_OPERATION_URL}
+    createValidation: ${API_CISEF_CREATE_VALIDATION_URL}
+    statusUrl: ${API_CISEF_NEW_OPERATION_URL}
+    imageUrl: ${API_CISEF_IMAGE_URL}
+    clientId: ${API_CISEF_CLIENT_ID}
+    clientSecret: ${API_CISEF_SECRET}
+  didit:
+    clientId: ${API_DIDIT_CLIENT_ID}
+    clientSecret: ${API_DIDIT_CLIENT_SECRET}
+    auth: ${API_DIDIT_AUTH}
+    baseUrl: ${API_DIDIT_BASE_URL}
+    callbackUrl: ${API_DIDIT_CALLBACK_URL}
+    vendorId: ${API_DIDIT_VENDOR_ID}
+
