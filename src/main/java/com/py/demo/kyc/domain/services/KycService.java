@@ -44,7 +44,7 @@ public class KycService extends BaseService<DiditSession, DiditSessionRecord, Lo
     }
 
     @Override
-    public String pruebaDeVida(String documento) {
+    public String iniciarPruebaDeVida(String documento) {
         try {
             DiditNewSessionRequest diditNewSessionRequest = DiditNewSessionRequest.builder()
                     .callBack(diditCallbackUrl)
@@ -61,7 +61,7 @@ public class KycService extends BaseService<DiditSession, DiditSessionRecord, Lo
             diditSession.setStatus(result.getBody().getStatus());
             diditSession.setValidationUrl(result.getBody().getUrl());
             diditSession.setFeatures(result.getBody().getFeatures());
-            diditSession.setSolicitud(solicitudService.findByDocumento(documento));
+            //diditSession.setSolicitud(solicitudService.findByDocumento(documento));
             repository.save(diditSession);
             return result.getBody().getUrl();
         } catch (Exception e) {
@@ -75,12 +75,6 @@ public class KycService extends BaseService<DiditSession, DiditSessionRecord, Lo
             // 1. Obtener el objeto relacionado a la solicitud
             DiditSession diditSession = repository.findTop1BySolicitud_IdOrderByIdDesc(solicitudId)
                     .orElseThrow(() -> new IllegalArgumentException("No se encontró una operación para la solicitud ID: " + solicitudId));
-
-//            // 2. Obtener el sessionId utilizando el servicio
-//            String sessionId = getSesionIdBySolicitudId(solicitudId);
-//            if (sessionId == null || sessionId.isBlank()) {
-//                throw new IllegalArgumentException("Sesión ID no encontrado para la solicitud ID: " + solicitudId);
-//            }
 
             // 3. Llamar al cliente para obtener el estado
             ResponseEntity<String> response = diditClient.getStatus(diditSession.getSessionId());
@@ -110,10 +104,6 @@ public class KycService extends BaseService<DiditSession, DiditSessionRecord, Lo
             log.error("Excepción al consultar el estado en Didit", e);
             throw new RuntimeException("Error en consultarStatusPruebaDeVida", e);
         }
-    }
-
-    private String getSesionIdBySolicitudId(Long solicitudId) {
-        return null;
     }
 
     @Override
