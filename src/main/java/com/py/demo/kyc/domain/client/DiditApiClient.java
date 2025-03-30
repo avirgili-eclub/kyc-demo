@@ -51,7 +51,7 @@ public class DiditApiClient implements IDiditApiClient {
             HttpHeaders headers = new HttpHeaders();
             headers.set("Authorization", "Basic " + encodedCredentials);
             headers.setAccept(List.of(MediaType.APPLICATION_JSON));
-            headers.setContentType(MediaType.MULTIPART_FORM_DATA);
+            headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
 
             MultiValueMap<String, String> bodyParams = new LinkedMultiValueMap<>();
             bodyParams.add("grant_type", "client_credentials");

@@ -10,7 +10,7 @@ import lombok.ToString;
 @Setter
 @Getter
 public class DiditSession extends EntityBase {
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = true)
     @JoinColumn(name = "solicitud_id")
     @ToString.Exclude
     private Solicitud solicitud;
