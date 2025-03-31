@@ -15,7 +15,7 @@ RUN --mount=type=cache,target=/root/.m2 mvn package -DskipTests
 # Step 2: package über jar
 FROM eclipse-temurin:17-jre-alpine
 LABEL maintainer="eliasmelgarejo@gmail.com,avirgili"
-LABEL org.opencontainers.image.source="https://github.com/avirgili-eclub/vms-server.git"
+LABEL org.opencontainers.image.source="https://github.com/avirgili-eclub/kyc-demo.git"
 
 # Set timezone
 RUN apk add --no-cache alpine-conf && \
