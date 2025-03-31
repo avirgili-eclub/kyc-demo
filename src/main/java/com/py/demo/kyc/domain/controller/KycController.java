@@ -28,7 +28,7 @@ public class KycController {
     @Operation(summary = "Iniciar prueba de vida",
             description = "Inicia el proceso de verificación biométrica para validar la identidad del cliente")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Prueba iniciada correctamente",
+            @ApiResponse(responseCode = "200", description = "https://verify.didit.me/session/eyJhbGciVCnfx",
                     content = @Content(schema = @Schema(implementation = String.class))),
             @ApiResponse(responseCode = "400", description = "Documento no válido"),
             @ApiResponse(responseCode = "500", description = "Error interno del servidor")
@@ -36,7 +36,20 @@ public class KycController {
     @PostMapping("/iniciarPruebaDeVida")
     public String iniciarPruebaDeVida(
             @Parameter(description = "Número de documento del cliente", required = true) @RequestParam String documento) {
-        return diditService.iniciarPruebaDeVida(documento);
+        try {
+            if (documento == null || documento.trim().isEmpty()) {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Documento no válido");
+            }
+
+            String url = diditService.iniciarPruebaDeVida(documento);
+            return ResponseEntity.ok(url);
+        } catch (IllegalArgumentException e) {
+            // Para casos donde el documento es inválido pero pasó la validación inicial
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Documento no válido: " + e.getMessage());
+        } catch (Exception e) {
+            // Para errores internos del servidor
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error interno del servidor: " + e.getMessage());
+        }
     }
 
 }
