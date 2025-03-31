@@ -1,6 +1,5 @@
 package com.py.demo.kyc.domain.repository;
 
-import com.py.demo.kyc.domain.models.entity.DiditSession;
 import com.py.demo.kyc.domain.models.entity.Solicitud;
 import com.py.demo.kyc.shared.BaseRepo;
 

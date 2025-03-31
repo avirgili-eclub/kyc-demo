@@ -1,7 +1,7 @@
 package com.py.demo.kyc.shared;
 
 
-import lombok.extern.slf4j.Slf4j;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-@Slf4j
+@Log4j2
 public abstract class BaseService<T, R, ID> implements IBaseService<T, R, ID> {
 
     public abstract BaseRepo getRepo();

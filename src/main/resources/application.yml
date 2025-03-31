@@ -44,11 +44,13 @@ api:
     vendorId: ${API_DIDIT_VENDOR_ID}
 
 springdoc:
-  api-docs:
-    path: /api-docs
+  show-actuator: true
+#  api-docs:
+#    path: /api-docs
   swagger-ui:
+    enabled: true
     path: /swagger-ui.html
-    operationsSorter: method
+#    operationsSorter: method
     tagsSorter: alpha
-  packages-to-scan: com.py.demo.kyc.domain.controller
+#  packages-to-scan: com.py.demo.kyc.domain.controller
 

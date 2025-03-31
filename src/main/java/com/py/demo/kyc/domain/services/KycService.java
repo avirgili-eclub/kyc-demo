@@ -4,6 +4,8 @@ import com.google.gson.Gson;
 import com.py.demo.kyc.domain.client.IDiditApiClient;
 import com.py.demo.kyc.domain.client.dto.DiditNewSessionRequest;
 import com.py.demo.kyc.domain.client.dto.DiditStatusResponse;
+import com.py.demo.kyc.domain.exception.PruebaDeVidaException;
+import com.py.demo.kyc.domain.models.dto.PruebaDeVidaResponse;
 import com.py.demo.kyc.domain.models.entity.DiditSession;
 import com.py.demo.kyc.domain.models.mapper.DiditSessionMapper;
 import com.py.demo.kyc.domain.models.record.DiditSessionRecord;
@@ -12,7 +14,7 @@ import com.py.demo.kyc.shared.BaseRepo;
 import com.py.demo.kyc.shared.BaseService;
 import com.py.demo.kyc.shared.DBExeption;
 import com.py.demo.kyc.utils.Util;
-import lombok.extern.slf4j.Slf4j;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +22,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Objects;
 
-@Slf4j
+@Log4j2
 @Service
 public class KycService extends BaseService<DiditSession, DiditSessionRecord, Long> implements IKycService {
 
@@ -44,7 +46,7 @@ public class KycService extends BaseService<DiditSession, DiditSessionRecord, Lo
     }
 
     @Override
-    public String iniciarPruebaDeVida(String documento) {
+    public PruebaDeVidaResponse iniciarPruebaDeVida(String documento) throws PruebaDeVidaException {
         try {
             DiditNewSessionRequest diditNewSessionRequest = DiditNewSessionRequest.builder()
                     .callBack(diditCallbackUrl)
@@ -63,10 +65,10 @@ public class KycService extends BaseService<DiditSession, DiditSessionRecord, Lo
             diditSession.setFeatures(result.getBody().getFeatures());
             //diditSession.setSolicitud(solicitudService.findByDocumento(documento));
             repository.save(diditSession);
-            return result.getBody().getUrl();
+            return new PruebaDeVidaResponse(result.getBody().getUrl());
         } catch (Exception e) {
-            log.error(e.getMessage());
-            throw new RuntimeException(e.getMessage());
+            log.error("",e);
+            throw new PruebaDeVidaException(e.getMessage(), e);
         }
     }
 

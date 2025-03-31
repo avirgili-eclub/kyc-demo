@@ -1,6 +1,6 @@
 package com.py.demo.kyc.shared;
 
-import lombok.extern.slf4j.Slf4j;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.core.NestedExceptionUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,7 +11,7 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 
 
-@Slf4j
+@Log4j2
 @ControllerAdvice
 public class GlobalExceptionHandler  {
 

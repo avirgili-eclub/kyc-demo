@@ -4,7 +4,7 @@ import com.google.gson.Gson;
 import com.py.demo.kyc.domain.client.dto.DiditNewSessionRequest;
 import com.py.demo.kyc.domain.client.dto.DiditNewSessionResponse;
 import lombok.SneakyThrows;
-import lombok.extern.slf4j.Slf4j;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.Map;
 
 @Service
-@Slf4j
+@Log4j2
 public class DiditApiClient implements IDiditApiClient {
     @Value("${api.didit.clientId}")
     private String clientId;
