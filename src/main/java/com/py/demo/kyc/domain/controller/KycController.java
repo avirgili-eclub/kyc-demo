@@ -44,8 +44,9 @@ public class KycController {
             return ResponseEntity.badRequest().body(result.getFieldError().getDefaultMessage());
         }
         try {
-            log.debug("Iniciando prueba de vida de {}", request);
+            log.info("Iniciando prueba de vida de {}", request);
             PruebaDeVidaResponse response = diditService.iniciarPruebaDeVida(request.getDocumento());
+            log.info("Enviando link prueba de vida de {}", request);
             return ResponseEntity.ok(response);
         } catch (Exception e) {
             log.error("Error al iniciar prueba de vida: ", e);
