@@ -1,0 +1,28 @@
+services:
+  vms:
+    container_name: 'vms'
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        DOCKER_BUILDKIT: 1
+    hostname: vms
+#    extra_hosts:
+#      - "auth.vending.com.py:10.50.0.30"  # Reemplaza con la IP real
+    restart: unless-stopped
+    environment:
+      - SPRING_DATASOURCE_URL=${DATASOURCE_URL}
+      - SPRING_DATASOURCE_USERNAME=${DB_USER}
+      - SPRING_DATASOURCE_PASSWORD=${DB_PASS}
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=${JPA_HIBERNATE_DDL_AUTO}
+    user: "spring:spring"
+    networks:
+      - vms-server-net
+#    volumes:
+#      - ./docker-data/resources_file:/home/spring/resources_file
+    ports:
+      - "8080:8080"
+    env_file:
+      - .env
+networks:
+  vms-server-net:
