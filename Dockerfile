@@ -14,8 +14,8 @@ RUN --mount=type=cache,target=/root/.m2 mvn package -DskipTests
 
 # Step 2: package über jar
 FROM eclipse-temurin:17-jre-alpine
-LABEL maintainer="eliasmelgarejo@gmail.com"
-LABEL org.opencontainers.image.source="https://github.com/eliasmelgarejo/vms-server.git"
+LABEL maintainer="eliasmelgarejo@gmail.com,avirgili"
+LABEL org.opencontainers.image.source="https://github.com/avirgili-eclub/vms-server.git"
 
 # Set timezone
 RUN apk add --no-cache alpine-conf && \
@@ -29,6 +29,6 @@ USER spring:spring
 WORKDIR /home/spring
 RUN mkdir resources_file
 
-COPY --from=build --chown=spring:spring build/target/*.jar ./vms_server.jar
+COPY --from=build --chown=spring:spring build/target/*.jar ./kyc.jar
 
-CMD ["java", "-jar", "vms_server.jar"]
+CMD ["java", "-jar", "kyc.jar"]
