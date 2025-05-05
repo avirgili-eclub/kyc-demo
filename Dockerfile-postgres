@@ -1,0 +1,5 @@
+FROM postgres:14.3
+
+# Adds support for localized text (Spanish)
+RUN localedef -i es_PY -c -f UTF-8 -A /usr/share/locale/locale.alias es_PY.UTF-8
+ENV LANG es_PY.utf8

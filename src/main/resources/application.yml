@@ -19,22 +19,22 @@ spring:
       hibernate:
         dialect: ${JPA_PROPERTIES_HIBERNATE_DIALECT:org.hibernate.dialect.PostgreSQLDialect}
         format_sql: ${JPA_PROPERTIES_HIBERNATE_FORMAT_SQL:true}
-    show-sql: ${JPA_SHOW_SQL:false}
+    show-sql: ${JPA_SHOW_SQL:true}
     database: ${JPA_DATABASE:postgresql}
     database-platform: ${JPA_DATABASE_PLATFORM:org.hibernate.dialect.PostgreSQLDialect}
   jackson:
     serialization:
       FAIL_ON_EMPTY_BEANS: ${JACKSON_SERIALIZATION_FAIL_ON_EMPTY_BEANS:true}
 api:
-  cisef:
-    url: ${API_CISEF_URL}
-    authUrl: ${API_CISEF_AUTH_URL}
-    newOperationUrl: ${API_CISEF_NEW_OPERATION_URL}
-    createValidation: ${API_CISEF_CREATE_VALIDATION_URL}
-    statusUrl: ${API_CISEF_NEW_OPERATION_URL}
-    imageUrl: ${API_CISEF_IMAGE_URL}
-    clientId: ${API_CISEF_CLIENT_ID}
-    clientSecret: ${API_CISEF_SECRET}
+#  cisef:
+#    url: ${API_CISEF_URL}
+#    authUrl: ${API_CISEF_AUTH_URL}
+#    newOperationUrl: ${API_CISEF_NEW_OPERATION_URL}
+#    createValidation: ${API_CISEF_CREATE_VALIDATION_URL}
+#    statusUrl: ${API_CISEF_NEW_OPERATION_URL}
+#    imageUrl: ${API_CISEF_IMAGE_URL}
+#    clientId: ${API_CISEF_CLIENT_ID}
+#    clientSecret: ${API_CISEF_SECRET}
   didit:
     clientId: ${API_DIDIT_CLIENT_ID}
     clientSecret: ${API_DIDIT_CLIENT_SECRET}

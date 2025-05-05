@@ -1,12 +1,29 @@
 services:
-  kyc:
-    container_name: 'kyc'
+  postgres:
+    build:
+      context: .
+      dockerfile: Dockerfile-postgres
+    hostname: postgres
+    restart: unless-stopped
+    depends_on:
+      - postgres
+    user: "spring:spring"
+    networks:
+      - kyc-net
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./docker-data/postgresql:/var/lib/postgresql/data
+    env_file:
+      - .env
+  app:
+    container_name: 'app'
     build:
       context: .
       dockerfile: Dockerfile
       args:
         DOCKER_BUILDKIT: 1
-    hostname: kyc
+    hostname: app
     restart: unless-stopped
     environment:
       - SPRING_DATASOURCE_URL=${DATA_SOURCE_URL}

@@ -29,6 +29,6 @@ USER spring:spring
 WORKDIR /home/spring
 RUN mkdir resources_file
 
-COPY --from=build --chown=spring:spring build/target/*.jar ./kyc.jar
+COPY --from=build --chown=spring:spring build/target/*.jar ./app.jar
 
-CMD ["java", "-jar", "kyc.jar"]
+CMD ["java", "-jar", "app.jar"]
