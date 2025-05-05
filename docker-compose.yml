@@ -5,9 +5,6 @@ services:
       dockerfile: Dockerfile-postgres
     hostname: postgres
     restart: unless-stopped
-    depends_on:
-      - postgres
-    user: "spring:spring"
     networks:
       - kyc-net
     ports:
@@ -30,6 +27,8 @@ services:
       - SPRING_DATASOURCE_USERNAME=${DB_USER}
       - SPRING_DATASOURCE_PASSWORD=${DB_PASS}
       - SPRING_JPA_HIBERNATE_DDL_AUTO=${JPA_HIBERNATE_DDL_AUTO}
+    depends_on:
+      - postgres
     user: "spring:spring"
     networks:
       - kyc-net
