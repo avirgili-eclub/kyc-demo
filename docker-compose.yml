@@ -1,5 +1,11 @@
 services:
   postgres:
+    container_name: 'postgres'
+    environment:
+      POSTGRES_DB: kyc-demo
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASS}
+      TZ: "America/Asuncion"
     build:
       context: .
       dockerfile: Dockerfile-postgres
@@ -23,6 +29,8 @@ services:
     hostname: app
     restart: unless-stopped
     environment:
+      - DB_VENDOR: POSTGRES
+      - DB_ADDR: jdbc:postgresql://postgres:5432
       - SPRING_DATASOURCE_URL=${DATA_SOURCE_URL}
       - SPRING_DATASOURCE_USERNAME=${DB_USER}
       - SPRING_DATASOURCE_PASSWORD=${DB_PASS}
